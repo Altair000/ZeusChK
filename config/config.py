@@ -1,4 +1,5 @@
-Host = 'bm47cpet7wmgfacjmrc0-mysql.services.clever-cloud.com'
-User = 'uu9w727xwga1klfg'
-Password= 'A7eH0T6ITxtjmU1MSQd9'
-Database = 'bm47cpet7wmgfacjmrc0'
+Host = 'sql.freedb.tech'
+User = 'freedb_altair000'
+Password= '?K9nRMq@A342RGT'
+Database = 'freedb_zeuschk'
+Port = 3306
