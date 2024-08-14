@@ -7,8 +7,9 @@ from utils.bot_config import *
 from admin.admin_cmds import register_admin_command_handlers
 
 app = Flask(__name__)
+TOKEN = os.environ.get('TELEGRAM_TOKEN')
 
-@app.route('/' + bot_token, methods=['POST'])
+@app.route('/' + TOKEN, methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "¡Mensaje recibido!", 200
@@ -16,7 +17,7 @@ def getMessage():
 @app.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://zeuschk-64ea0cb25362.herokuapp.com/' + bot_token)
+    bot.set_webhook(url='https://zeuschk-64ea0cb25362.herokuapp.com/' + TOKEN)
     return "¡Webhook configurado!", 200
 
 # Registra los manejadores de comandos y callbacks
