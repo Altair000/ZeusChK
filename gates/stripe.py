@@ -1,3 +1,5 @@
+from database.db import *
+
 @bot.message_handler(commands=['st'])
 def st(message: types.Message):
 
@@ -100,27 +102,27 @@ def st(message: types.Message):
 <b>MSG</b>➟ {msg}
 <b>TOOK:</b> <code>{toc - tic:0.2f}</code>(s)
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {await is_owner(ID)}
+<b>OWNER</b>: {is_owner(ID)}
 <b>BOT</b>: @{BOT_USERNAME}''')
 
         if 'security code' in rx.text:
-            return await message.reply(f'''
+            return message.reply(f'''
 ✅<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CCN
 <b>MSG</b>➟ {msg}
 <b>TOOK:</b> <code>{toc - tic:0.2f}</code>(s)
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {await is_owner(ID)}
+<b>OWNER</b>: {is_owner(ID)}
 <b>BOT</b>: @{BOT_USERNAME}''')
 
         if 'false' in rx.text:
-            return await message.reply(f'''
+            return message.reply(f'''
 ❌<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #Declined
 <b>MSG</b>➟ {msg}
 <b>TOOK:</b> <code>{toc - tic:0.2f}</code>(s)
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {await is_owner(ID)}
+<b>OWNER</b>: {is_owner(ID)}
 <b>BOT</b>: @{BOT_USERNAME}''')
 
         message.reply(f'''
@@ -129,5 +131,5 @@ def st(message: types.Message):
 <b>MSG</b>➟ {rx.text}
 <b>TOOK:</b> <code>{toc - tic:0.2f}</code>(s)
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {await is_owner(ID)}
+<b>OWNER</b>: {is_owner(ID)}
 <b>BOT</b>: @{BOT_USERNAME}''')
