@@ -44,6 +44,14 @@ def shopify(cc, mes, ano, cvv, message):
         req6 = session.post(url='https://deposit.us.shopifycs.com/sessions', json=payload_4)
         token = req6.json()
         id_ = token.get('id')
+        bot send_message(message.chat.id, "Comenzando...")
+        for i in range(10):
+            bot edit_message_text(chat_id=message.chat.id,
+                                  text=f'''
+                                  • VERIFICANDO CC: •｛i*10｝%'''
+                                  reply_markup=None
+                                  )
+                                  time.sleep(1)
         print("</> ID SESSION:", id_)
             
         payload_5 = f'_method=patch&authenticity_token={authenticity_token}&previous_step=payment_method&step=&s={id_}&checkout%5Bpayment_gateway%5D=71778074802&checkout%5Bcredit_card%5D%5Bvault%5D=false&checkout%5Bdifferent_billing_address%5D=false&checkout%5Bremember_me%5D=false&checkout%5Bremember_me%5D=0&checkout%5Bvault_phone%5D=%2B19542287072&checkout%5Btotal_price%5D=1999&checkout_submitted_request_url=https%3A%2F%2Fwww.manitobah.com%2F999802%2Fcheckouts%2Fb18bcd169ec759e53a22ca6b96714229%3Ffrom_processing_page%3D1%26validate%3Dtrue&checkout_submitted_page_id=49d93155-57C0-4C2C-FF80-315C0C8DB5E8&complete=1&checkout%5Bclient_details%5D%5Bbrowser_width%5D=1302&checkout%5Bclient_details%5D%5Bbrowser_height%5D=953&checkout%5Bclient_details%5D%5Bjavascript_enabled%5D=1&checkout%5Bclient_details%5D%5Bcolor_depth%5D=24&checkout%5Bclient_details%5D%5Bjava_enabled%5D=false&checkout%5Bclient_details%5D%5Bbrowser_tz%5D=0'
