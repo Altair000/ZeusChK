@@ -1,4 +1,5 @@
 import telebot
+import os
 from flask import Flask, request
 from handlers.command_handlers import register_command_handlers
 from handlers.callback_handlers import register_callback_handlers
@@ -7,12 +8,16 @@ from admin.admin_cmds import register_admin_command_handlers
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "¡Mensaje recibido!", 200
+
+@app.route("/")
 def webhook():
-    json_string = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return '', 200
+    bot.remove_webhook()
+    bot.set_webhook(url='https://<tu-app>.herokuapp.com/' + TOKEN)
+    return "¡Webhook configurado!", 200
 
 # Registra los manejadores de comandos y callbacks
 register_command_handlers(bot)
