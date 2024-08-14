@@ -48,8 +48,10 @@ def shopify(cc, mes, ano, cvv, message):
         for i in range(10):
             bot.edit_message_text(chat_id=message.chat.id,
                                   text=f'''
-                                  • VERIFICANDO CC: •｛i*10｝%'''
-                                  reply_markup=None
+                                  • VERIFICANDO CC: •｛i*10｝%
+                                  ''',
+                                  reply_markup=None,
+                                  parse_mode="HTML"
                                   )
                                   time.sleep(1)
         print("</> ID SESSION:", id_)
