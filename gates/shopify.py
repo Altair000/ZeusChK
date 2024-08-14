@@ -44,7 +44,7 @@ def shopify(cc, mes, ano, cvv, message):
         req6 = session.post(url='https://deposit.us.shopifycs.com/sessions', json=payload_4)
         token = req6.json()
         id_ = token.get('id')
-        bot send_message(message.chat.id, "Comenzando...")
+        bot.send_message(message.chat.id, "Comenzando...")
         for i in range(10):
             bot edit_message_text(chat_id=message.chat.id,
                                   text=f'''
