@@ -94,7 +94,7 @@ def st(message: types.Message):
         msg = rx.json()['msg']
 
         if 'true' in rx.text:
-            return await message.reply(f'''
+            return message.reply(f'''
 ✅<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CHARGED 25$
 <b>MSG</b>➟ {msg}
