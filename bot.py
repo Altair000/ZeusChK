@@ -8,7 +8,7 @@ from admin.admin_cmds import register_admin_command_handlers
 
 app = Flask(__name__)
 
-@app.route('/' + TOKEN, methods=['POST'])
+@app.route('/' + bot_token, methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "¡Mensaje recibido!", 200
@@ -16,7 +16,7 @@ def getMessage():
 @app.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://<tu-app>.herokuapp.com/' + TOKEN)
+    bot.set_webhook(url='https://zeuschk-64ea0cb25362.herokuapp.com/' + bot_token)
     return "¡Webhook configurado!", 200
 
 # Registra los manejadores de comandos y callbacks
@@ -25,5 +25,5 @@ register_callback_handlers(bot)
 register_admin_command_handlers(bot)
 
 # Main
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
