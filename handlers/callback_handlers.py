@@ -64,6 +64,25 @@ def handle_back(call):
         disable_web_page_preview=True
     )
 
+# Define el manejador del callbacks para la opción2
+@bot.callback_query_handler(func=lambda call: call.data == 'gateways')
+def handle_opcion2(call):
+    gateways_text=f'''===================|
+    •  SHOPIFY - CHARGE (1$) •
+    > Tipo: AVS
+    > Comando: /sh
+    > Soporte: 1 cc
+    > Info: Uso con Suscripción PLUS
+    =========================|
+    '''
+    bot.edit_message_text(
+        chat_id=call.message.chat.id,
+        message_id=call.message.message_id,
+        text=gateways_text,
+        reply_markup=create_back_keyboard(),
+        parse_mode='HTML'
+    )
+
 # Define el manejador de callbacks para la opción3
 @bot.callback_query_handler(func=lambda call: call.data == 'tools')
 def handle_opcion3(call):
@@ -160,5 +179,6 @@ def handle_opcion4(call):
 def register_callback_handlers(bot: TeleBot):
     bot.register_callback_query_handler(handle_back, func=lambda call: call.data == 'atras')
     bot.register_callback_query_handler(handle_back, func=lambda call: call.data == 'cuenta')
+    bot.register_callback_query_handler(handle_opcion2, func=lambda call: call.data == 'gateways')
     bot.register_callback_query_handler(handle_opcion3, func=lambda call: call.data == 'tools')
     bot.register_callback_query_handler(handle_opcion4, func=lambda call: call.data == 'precios')

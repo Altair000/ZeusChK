@@ -2,6 +2,7 @@ from telebot import TeleBot, types
 from database.db import *
 from handlers.callback_handlers import *
 from services.card_generator import *
+from gates.shopify import *
 import random
 import requests
 import re
@@ -164,9 +165,21 @@ def gen(message: types.Message):
     
     bot.reply_to(message, response, parse_mode="Markdown")
 
+@bot.message_handler(commands=['sh'])
+def sh(message):
+    user_id = message.from_user.id
+    if is_plus(user_id):
+        card_data = message.text.split()[1]  # Asume que el usuario envía /pay ccn|mm|yyyy|cvv
+        cc, mes, ano, cvv = card_data.split('|')
+        # Continuar con el procesamiento de la transacción
+        shopify(cc, mes, ano, cvv, message)
+    else:
+        bot.reply_to(message, "No tienes premiso para utilizar este comando.")
+
 def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['start'])
     bot.register_message_handler(info, commands=['info'])
     bot.register_message_handler(start, commands=['admin'])
     bot.register_message_handler(start, commands=['bin'])
     bot.register_message_handler(start, commands=['gen'])
+    bot.register_message_handler(sh, commands=['sh'])
