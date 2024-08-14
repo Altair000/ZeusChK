@@ -1,5 +1,6 @@
 import requests
 import time
+import random
 from utils.helpers import *
 from utils.bot_config import *
 from handlers.command_handlers import *
@@ -7,7 +8,29 @@ from handlers.command_handlers import *
 def shopify(cc, mes, ano, cvv, message):
     chat_id = message.chat.id
     session = requests.Session()
-    session.proxies = {'https': 'http://yosuojza-rotate:h8wex4qzydhf@p.webshare.io:80'}
+    
+    proxy_pool = [
+        'http://oumcwwhu:ay3xyt6fv7hz@45.127.248.127:5128',
+        'http://oumcwwhu:ay3xyt6fv7hz@64.64.118.149:6732',
+        'http://oumcwwhu:ay3xyt6fv7hz@167.160.180.203:6754'
+    ]
+
+    def get_random_proxy():
+    return random.choice(proxy_pool)
+
+    for _ in range(3):
+    proxy = get_random_proxy()
+    session.proxies = {
+        'http': proxy,
+        'https': proxy
+    }
+        try:
+            response = session.get('http://www.httpbin.org/ip')
+            print(response.text)
+        except requests.exceptions.RequestException as e:
+            print(f"Solicitud fallida: {e}")
+    
+    session.close()
 
     try:
         payload_1 = {'id': '43651399155890'}
