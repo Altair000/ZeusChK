@@ -2,7 +2,7 @@ from database.db import *
 from utils.bot_config import *
 
 @bot.message_handler(commands=['st'])
-def st(message: types.Message):
+def st(message):
 
     # Random DATA
     letters = string.ascii_lowercase
