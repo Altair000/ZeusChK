@@ -19,18 +19,18 @@ def shopify(cc, mes, ano, cvv, message):
         return random.choice(proxy_pool)
 
     for _ in range(3):
-    proxy = get_random_proxy()
-    session.proxies = {
-        'http': proxy,
-        'https': proxy
-    }
+        proxy = get_random_proxy()
+        session.proxies = {
+            'http': proxy,
+            'https': proxy
+        }
         try:
             response = session.get('http://www.httpbin.org/ip')
             print(response.text)
         except requests.exceptions.RequestException as e:
             print(f"Solicitud fallida: {e}")
     
-    session.close()
+        session.close()
 
     try:
         payload_1 = {'id': '43651399155890'}
