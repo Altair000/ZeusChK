@@ -225,7 +225,7 @@ def b3(message):
     except Exception as e:
         print(f"Error inesperado: {e}")
         msg = "DECLINADA"
-        ccvip = f"{card_number}|{expiration_date}|{cvv}"
+        ccvip = f"{ccn}|{mm}|{yy}|{cvv}"
         respuesta = f"Error inesperado: {e}"
         bot.send_message(message.chat.id, text=f"""
 <b>Información de la Tarjeta</b> <code>{ccvip}</code>
