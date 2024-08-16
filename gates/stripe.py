@@ -81,7 +81,7 @@ def stripe(cc, mes, ano, cvv, message):
 
     if 'true' in rx.text:
         return message.reply(f'''
-✅<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
+✅<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CHARGED 25$
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
@@ -90,7 +90,7 @@ def stripe(cc, mes, ano, cvv, message):
 
     if 'security code' in rx.text:
         return message.reply(f'''
-✅<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
+✅<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CCN
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
@@ -99,7 +99,7 @@ def stripe(cc, mes, ano, cvv, message):
 
     if 'false' in rx.text:
         return message.reply(f'''
-❌<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
+❌<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #Declined
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
@@ -107,7 +107,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>BOT</b>: @{BOT_USERNAME}''')
 
     message.reply(f'''
-❌<b>CC</b>➟ <code>{ccn}|{mm}|{yy}|{cvv}</code>
+❌<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ DEAD
 <b>MSG</b>➟ {rx.text}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
