@@ -24,7 +24,7 @@ def stripe(cc, mes, ano, cvv, message):
                                  )
             time.sleep(1)
     
-    message.answer_chat_action('typing')
+    bot.send_chat_action(message.chat.id, 'typing')
     ID = message.from_user.id
     FIRST = message.from_user.first_name
     
