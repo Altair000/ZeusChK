@@ -194,7 +194,7 @@ def b3(message):
         ccn, mm, yy, cvv = card_info.split('|')
         msg, respuesta = check_credit_card(ccn, mm, yy, cvv, message)
 
-        ccvip = f"{card_number}|{expiration_date}|{cvv}"
+        ccvip = f"{ccn}|{mm}|{yy}|{cvv}"
         
         # Obtener información del BIN
         bin_info = get_bin_info(bin_number[:6])
