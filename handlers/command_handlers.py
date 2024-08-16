@@ -192,7 +192,7 @@ def b3(message):
         card_info = message.text.split()[1]  # Ignorar el comando y obtener los argumentos
         
         ccn, mm, yy, cvv = card_info.split('|')
-        msg, respuesta = check_credit_card(ccn, mm, cvv, message)
+        msg, respuesta = check_credit_card(ccn, mm, yy, cvv, message)
 
         ccvip = f"{card_number}|{expiration_date}|{cvv}"
         
