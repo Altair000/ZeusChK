@@ -3,6 +3,7 @@ from database.db import *
 from handlers.callback_handlers import *
 from services.card_generator import *
 from gates.shopify import *
+from gates.stripe import *
 import random
 import requests
 import re
@@ -175,6 +176,13 @@ def sh(message):
         shopify(cc, mes, ano, cvv, message)
     else:
         bot.reply_to(message, "No tienes premiso para utilizar este comando.")
+
+@bot.message_handler(commands=['st'])
+def st(message):
+      card_data = message.text.split()[1]
+      cc, mes, ano, cvv = card_data.split('|')
+       
+      stripe(cc, mes, ano, cvv, message)
 
 def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['start'])
