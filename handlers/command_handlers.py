@@ -2,8 +2,7 @@ from telebot import TeleBot, types
 from database.db import *
 from handlers.callback_handlers import *
 from services.card_generator import *
-from gates.shopify import *
-from gates.stripe import *
+from gates import *
 import random
 import requests
 import re
@@ -185,7 +184,7 @@ def st(message):
       stripe(cc, mes, ano, cvv, message)
 
 @bot.message_handler(commands=['b3'])
-def handle_check(message):
+def b3(message):
     try:
         # Supongamos que el usuario envía los datos en el formato: número, fecha, cvv
         card_info = message.text.split()[1:]  # Ignorar el comando y obtener los argumentos
