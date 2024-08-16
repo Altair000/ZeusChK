@@ -184,6 +184,56 @@ def st(message):
        
       stripe(cc, mes, ano, cvv, message)
 
+@bot.message_handler(commands=['b3'])
+def handle_check(message):
+    try:
+        # Supongamos que el usuario envía los datos en el formato: número, fecha, cvv
+        card_info = message.text.split()[1:]  # Ignorar el comando y obtener los argumentos
+        if len(card_info) != 3:
+            raise ValueError("Formato incorrecto. Usa: /check número fecha_expiración cvv")
+        
+        card_number, expiration_date, cvv = card_info
+        msg, respuesta = check_credit_card(card_number, expiration_date, cvv)
+
+        ccvip = f"{card_number}|{expiration_date}|{cvv}"
+        
+        # Obtener información del BIN
+        bin_info = get_bin_info(bin_number[:6])
+        bank_name = bin_info.get("bank", "Desconocido")
+        card_type = bin_info.get("type", "Desconocido")
+        card_level = bin_info.get("level", "Desconocido")
+        brand = bin_info.get("brand", "Desconocido")
+        country = bin_info.get("country", "Desconocido")
+        flag = bin_info.get("flag", "")
+
+        user = message.from_user
+        chat_id = message.chat.id
+
+        # Enviar el mensaje formateado
+        bot.send_message(chat_id, text=f"""
+<b>Información de la Tarjeta</b> <code>{ccvip}</code>
+<b>• Resultado:</b> <code>{msg}</code>
+<b>Respuesta:</b> <code>{respuesta}</code>
+<b>Banco:</b> <code>{bank_name}</code>
+<b>Tipo:</b> <code>{card_type}</code> - <code>{card_level}</code> - <code>{brand}</code>
+<b>🟢 País:</b> <code>{country} {flag}</code> 
+-------------------INFO------------------- 
+• Créditos: {get_tokens(chat_id)}
+• BY: @{user.username}
+• ID: <code>{user.id}</code>
+        """, parse_mode='HTML')
+
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+        msg = "DECLINADA"
+        ccvip = f"{card_number}|{expiration_date}|{cvv}"
+        respuesta = f"Error inesperado: {e}"
+        bot.send_message(message.chat.id, text=f"""
+<b>Información de la Tarjeta</b> <code>{ccvip}</code>
+<b>Resultado:</b> <code>{msg}</code>
+<b>Respuesta:</b> <code>{respuesta}</code>
+        """, parse_mode='HTML')
+
 def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['start'])
     bot.register_message_handler(info, commands=['info'])
@@ -192,3 +242,4 @@ def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['gen'])
     bot.register_message_handler(sh, commands=['sh'])
     bot.register_message_handler(st, commands=['st'])
+    bot.register_message_handler(b3, commands=['b3'])
