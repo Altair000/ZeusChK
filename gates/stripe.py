@@ -96,7 +96,9 @@ def stripe(cc, mes, ano, cvv, message):
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
 <b>OWNER</b>: {is_owner(ID)}
-<b>BOT</b>: @{BOT_USERNAME}''', parse_mode="HTML")
+<b>BOT</b>: @{BOT_USERNAME}''',
+                            parse_mode="HTML"
+                           )
 
     if 'security code' in rx.text:
         return bot.reply_to(message, f'''
@@ -105,7 +107,9 @@ def stripe(cc, mes, ano, cvv, message):
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
 <b>OWNER</b>: {is_owner(ID)}
-<b>BOT</b>: @{BOT_USERNAME}''', parse_mode="HTML"))
+<b>BOT</b>: @{BOT_USERNAME}''',
+                            parse_mode="HTML"
+                           )
 
     if 'false' in rx.text:
         return bot.reply_to(message, f'''
@@ -114,7 +118,9 @@ def stripe(cc, mes, ano, cvv, message):
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
 <b>OWNER</b>: {is_owner(ID)}
-<b>BOT</b>: @{BOT_USERNAME}''', parse_mode="HTML"))
+<b>BOT</b>: @{BOT_USERNAME}''',
+                            parse_mode="HTML"
+                           )
 
     bot.reply_to(message, f'''
 ❌<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
@@ -122,4 +128,6 @@ def stripe(cc, mes, ano, cvv, message):
 <b>MSG</b>➟ {rx.text}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
 <b>OWNER</b>: {is_owner(ID)}
-<b>BOT</b>: @{BOT_USERNAME}''', parse_mode="HTML"))
+<b>BOT</b>: @{BOT_USERNAME}''',
+                 parse_mode="HTML"
+                )
