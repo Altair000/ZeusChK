@@ -1,6 +1,7 @@
 import random
 from database.db import *
 from utils.bot_config import *
+from handlers.command_handlers import *
 
 def stripe(cc, mes, ano, cvv, message):
     letters = string.ascii_lowercase
