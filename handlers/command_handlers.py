@@ -180,10 +180,16 @@ def sh(message):
 
 @bot.message_handler(commands=['st'])
 def st(message):
-      card_data = message.text.split()[1]
-      cc, mes, ano, cvv = card_data.split('|')
-       
-      stripe(cc, mes, ano, cvv, message)
+    try:
+        card_data = message.text.split()[1]
+        cc, mes, ano, cvv = card_data.split('|')
+        stripe(cc, mes, ano, cvv, message)
+    except IndexError:
+        # Manejar el caso en que el formato de entrada no sea correcto
+        bot.send_message(message.chat.id, "Formato incorrecto. Usa: /st número|mes|año|cvv")
+    except Exception as e:
+        # Manejar otros errores
+        bot.send_message(message.chat.id, f"Error inesperado: {e}")
 
 @bot.message_handler(commands=['b3'])
 def b3(message):
