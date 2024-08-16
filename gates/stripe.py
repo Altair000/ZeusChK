@@ -63,7 +63,7 @@ def stripe(cc, mes, ano, cvv, message):
         "accept-language": "en-US,en;q=0.9"
     }
 
-    pr = session.post('https://api.stripe.com/v1/', data=postdata, headers=HEADER)
+    pr = session.post('https://api.stripe.com/v1/tokens', data=postdata, headers=HEADER)
     Id = pr.json()['id']
 
     # hmm
