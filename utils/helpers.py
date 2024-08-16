@@ -7,7 +7,7 @@ def get_random_string(length):
 
 def get_bin_info(bin_number):
     try:
-        response = requests.get(f'https://bins.antipublic.cc/bins/{bin_number[:6]}')
+        response = requests.get(f'https://api.bincodes.com/bin/?format=json&api_key=171b006d07315cff3531827cee360851&bin={bin_number[:6]}')
         if response.status_code == 200:
             bin_data = response.json()
             bin_info = {
