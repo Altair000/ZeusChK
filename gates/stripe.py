@@ -13,6 +13,8 @@ def stripe(cc, mes, ano, cvv, message):
     Name = f'{First}+{Last}'
     Email = f'{First}.{Last}@gmail.com'
     session = requests.Session()
+    mm = mes
+    yy = ano
 
     sent_message = bot.send_message(message.chat.id, "Comenzando...")
     for i in range(10):
