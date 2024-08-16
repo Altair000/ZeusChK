@@ -191,3 +191,4 @@ def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['bin'])
     bot.register_message_handler(start, commands=['gen'])
     bot.register_message_handler(sh, commands=['sh'])
+    bot.register_message_handler(st, commands=['st'])
