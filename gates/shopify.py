@@ -18,7 +18,7 @@ def shopify(cc, mes, ano, cvv, message):
     def get_random_proxy():
         return random.choice(proxy_pool)
 
-    for _ in range(3):
+    for _ in range(1):
         proxy = get_random_proxy()
         session.proxies = {
             'http': proxy,
