@@ -190,11 +190,9 @@ def b3(message):
     try:
         # Supongamos que el usuario envía los datos en el formato: número, fecha, cvv
         card_info = message.text.split()[1]  # Ignorar el comando y obtener los argumentos
-        if len(card_info) != 3:
-            raise ValueError("Formato incorrecto. Usa: /check número fecha_expiración cvv")
         
-        card_number, expiration_date, cvv = card_info
-        msg, respuesta = check_credit_card(card_number, expiration_date, cvv)
+        ccn, mm, yy, cvv = card_info.split('|')
+        msg, respuesta = check_credit_card(ccn, mm, cvv, message)
 
         ccvip = f"{card_number}|{expiration_date}|{cvv}"
         
