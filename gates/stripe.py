@@ -10,7 +10,9 @@ def stripe(cc, mes, ano, cvv, message):
     Name = f'{First}+{Last}'
     Email = f'{First}.{Last}@gmail.com'
     session = requests.Session()
-   
+
+    bot.send_message("Procesando")
+    
     message.answer_chat_action('typing')
     ID = message.from_user.id
     FIRST = message.from_user.first_name
