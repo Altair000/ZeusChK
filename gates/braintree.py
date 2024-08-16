@@ -12,7 +12,7 @@ gateway = braintree.BraintreeGateway(
 
 # Función para verificar una tarjeta de crédito
 def check_credit_card(ccn, mm, yy, cvv, message):
-    number = ccn
+    card_number = ccn
     expiration_date = mm + yy
     result = gateway.transaction.sale({
         "amount": "0.01",  # Monto pequeño para verificar la tarjeta
