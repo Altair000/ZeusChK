@@ -14,7 +14,15 @@ def stripe(cc, mes, ano, cvv, message):
     Email = f'{First}.{Last}@gmail.com'
     session = requests.Session()
 
-    bot.send_message("Procesando")
+    sent_message = bot.send_message(message.chat.id, "Comenzando...")
+        for i in range(10):
+            bot.edit_message_text(chat_id=message.chat.id, text = f'''
+                                  • VERIFICANDO CC: •{i * 10}%''',
+                                  reply_markup=None,
+                                  message_id=sent_message.message_id,
+                                  parse_mode="HTML"
+                                 )
+            time.sleep(1)
     
     message.answer_chat_action('typing')
     ID = message.from_user.id
