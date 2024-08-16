@@ -46,7 +46,7 @@ def stripe(cc, mes, ano, cvv, message):
         "guid": Guid,
         "muid": Muid,
         "sid": Sid,
-        "key": "pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn",
+        "key": "pk_live_YJm7rSUaS7t9C8cdWfQeQ8Nb",
         "card[name]": Name,
         "card[number]": cc,
         "card[exp_month]": mes,
@@ -95,7 +95,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>STATUS</b>➟ #CHARGED 25$
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {is_owner(ID)}
+<b>OWNER</b>: {'✅' if is_owner(ID) else '🚫'}
 <b>BOT</b>: @{BOT_USERNAME}''',
                             parse_mode="HTML"
                            )
@@ -106,7 +106,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>STATUS</b>➟ #CCN
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {is_owner(ID)}
+<b>OWNER</b>: {'✅' if is_owner(ID) else '🚫'}
 <b>BOT</b>: @{BOT_USERNAME}''',
                             parse_mode="HTML"
                            )
@@ -117,7 +117,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>STATUS</b>➟ #Declined
 <b>MSG</b>➟ {msg}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {is_owner(ID)}
+<b>OWNER</b>: {'✅' if is_owner(ID) else '🚫'}
 <b>BOT</b>: @{BOT_USERNAME}''',
                             parse_mode="HTML"
                            )
@@ -127,7 +127,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>STATUS</b>➟ DEAD
 <b>MSG</b>➟ {rx.text}
 <b>CHKBY</b>➟ <a href="tg://user?id={ID}">{FIRST}</a>
-<b>OWNER</b>: {is_owner(ID)}
+<b>OWNER</b>: {'✅' if is_owner(ID) else '🚫'}
 <b>BOT</b>: @{BOT_USERNAME}''',
                  parse_mode="HTML"
                 )
