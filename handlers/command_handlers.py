@@ -2,7 +2,9 @@ from telebot import TeleBot, types
 from database.db import *
 from handlers.callback_handlers import *
 from services.card_generator import *
-from gates import *
+from gates.shopify import *
+from gates.stripe import *
+from gates.braintree import *
 import random
 import requests
 import re
