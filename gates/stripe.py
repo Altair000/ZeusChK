@@ -1,4 +1,6 @@
 import random
+import string
+import requests
 from database.db import *
 from utils.bot_config import *
 from handlers.command_handlers import *
