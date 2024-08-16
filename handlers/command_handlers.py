@@ -193,11 +193,12 @@ def b3(message):
         
         ccn, mm, yy, cvv = card_info.split('|')
         msg, respuesta = check_credit_card(ccn, mm, yy, cvv, message)
-
+        bin_number = ccn[:6]
+        
         ccvip = f"{ccn}|{mm}|{yy}|{cvv}"
         
         # Obtener información del BIN
-        bin_info = get_bin_info(bin_number[:6])
+        bin_info = get_bin_info(bin_number)
         bank_name = bin_info.get("bank", "Desconocido")
         card_type = bin_info.get("type", "Desconocido")
         card_level = bin_info.get("level", "Desconocido")
