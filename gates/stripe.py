@@ -88,7 +88,7 @@ def stripe(cc, mes, ano, cvv, message):
     msg = rx.json()['msg']
 
     if 'true' in rx.text:
-        return message.reply(f'''
+        return bot.reply_to(message, f'''
 ✅<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CHARGED 25$
 <b>MSG</b>➟ {msg}
@@ -97,7 +97,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>BOT</b>: @{BOT_USERNAME}''')
 
     if 'security code' in rx.text:
-        return message.reply(f'''
+        return bot.reply_to(message, f'''
 ✅<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #CCN
 <b>MSG</b>➟ {msg}
@@ -106,7 +106,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>BOT</b>: @{BOT_USERNAME}''')
 
     if 'false' in rx.text:
-        return message.reply(f'''
+        return bot.reply_to(message, f'''
 ❌<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ #Declined
 <b>MSG</b>➟ {msg}
@@ -114,7 +114,7 @@ def stripe(cc, mes, ano, cvv, message):
 <b>OWNER</b>: {is_owner(ID)}
 <b>BOT</b>: @{BOT_USERNAME}''')
 
-    message.reply(f'''
+    bot.reply_to(message, f'''
 ❌<b>CC</b>➟ <code>{cc}|{mm}|{yy}|{cvv}</code>
 <b>STATUS</b>➟ DEAD
 <b>MSG</b>➟ {rx.text}
