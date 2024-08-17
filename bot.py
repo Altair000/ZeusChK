@@ -28,6 +28,7 @@ def handle_document(message):
     bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
 
     if message.document.file_name == 'proxies.txt':
+        bot.send_message(message.chat.id, "ARCHIVO DE PROXIES RECIBIDO")
         file_info = bot.get_file(message.document.file_id)
         file_path = file_info.file_path
         proxies_list = update_proxies_list(file_path)
