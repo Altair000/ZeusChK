@@ -180,7 +180,7 @@ def sh(message):
 
 @bot.message_handler(commands=['st'])
 def st(message):
-    card = message.text[4:].strip()
+    card = message.text[4].strip()
     return card
     stripe(card, message)
 @bot.message_handler(commands=['b3'])
