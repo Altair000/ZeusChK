@@ -1,5 +1,4 @@
-import random
-import string
+import time
 import requests
 from database.db import *
 from utils.bot_config import *
