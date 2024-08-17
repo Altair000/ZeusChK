@@ -1,68 +1,6 @@
 import requests
 from utils.bot_config import *
 
-# Manejador para documentos recibidos
-@bot.message_handler(content_types=['document'])
-def handle_document(message):
-    if not is_owner(message.from_user.id):
-        bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
-        return
-    
-    bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
-
-    if message.document.file_name == 'proxies.txt':
-        bot.send_message(message.chat.id, "ARCHIVO DE PROXIES RECIBIDO")
-        file_info = bot.get_file(message.document.file_id)
-        file_path = file_info.file_path
-        proxies_list = update_proxies_list(file_path)
-
-        # Mensaje de inicio de adquisición de proxies
-        sent_message = bot.send_message(message.chat.id, "Comenzando adquisición de proxies...")
-        for i in range(10):
-            bot.edit_message_text(chat_id=message.chat.id,
-                                  text=f'• ADQUIRIENDO PROXIES DE FILE: {i * 10}%',
-                                  reply_markup=None,
-                                  message_id=sent_message.message_id,
-                                  parse_mode="HTML"
-                                  )
-            time.sleep(1)
-
-        # Filtrar y actualizar proxies
-        functional_proxies, functional_count, removed_proxies, total_proxies = filter_and_update_proxies(proxies_list)
-
-        # Mensaje de inicio de verificación de proxies
-        sent_message_1 = bot.send_message(message.chat.id, "Comenzando verificación de proxies...")
-        for i in range(10):
-            bot.edit_message_text(chat_id=message.chat.id,
-                                  text=f'• VERIFICANDO PROXIES: {i * 10}%',
-                                  reply_markup=None,
-                                  message_id=sent_message_1.message_id,
-                                  parse_mode="HTML"
-                                  )
-            time.sleep(1)
-
-        # Mensaje con resultados finales
-        response_message = (
-            f"Total de proxies: {total_proxies}\n"
-            f"Proxies funcionales: {functional_count}\n"
-            f"Proxies eliminados: {removed_proxies}\n"
-            "¿Estás satisfecho con la respuesta? (sí/no)"
-        )
-        bot.send_message(message.chat.id, response_message)
-
-        # Manejador para la respuesta de satisfacción
-        @bot.message_handler(func=lambda m: m.chat.id == message.chat.id)
-        def satisfaction_response(satisfaction_message):
-            if satisfaction_message.text.lower() == 'sí':
-                bot.send_message(message.chat.id, "¡PROXIES ACTUALIZADOS!")
-            elif satisfaction_message.text.lower() == 'no':
-                bot.send_message(message.chat.id, "Por favor, envía un nuevo archivo de proxies.")
-                bot.register_next_step_handler(satisfaction_message, handle_document)
-            else:
-                bot.send_message(message.chat.id, "Por favor, responde con 'sí' o 'no'.")
-    else:
-        bot.send_message(message.chat.id, "Por favor, envía un archivo 'proxies.txt'.")
-
 def update_proxies_list(file_path):
     proxies_list = {}
     message_id = message.chat.id
