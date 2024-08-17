@@ -17,12 +17,15 @@ bugsnag.configure(
   project_root = "https://zeuschk-64ea0cb25362.herokuapp.com/",
 )
 
+# Manejador para documentos recibidos
 @bot.message_handler(content_types=['document'])
 def handle_document(message):
     if not is_owner(message.from_user.id):
         bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
-    else:
-        bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
+        return
+    
+    bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
+
     if message.document.file_name == 'proxies.txt':
         file_info = bot.get_file(message.document.file_id)
         file_path = file_info.file_path
@@ -72,7 +75,6 @@ def handle_document(message):
                 bot.register_next_step_handler(satisfaction_message, handle_document)
             else:
                 bot.send_message(message.chat.id, "Por favor, responde con 'sí' o 'no'.")
-
     else:
         bot.send_message(message.chat.id, "Por favor, envía un archivo 'proxies.txt'.")
 
