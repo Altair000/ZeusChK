@@ -206,8 +206,8 @@ def handle_document(message):
                 bot.register_next_step_handler(satisfaction_message, handle_document)
             else:
                 bot.send_message(message.chat.id, "Por favor, responde con 'sí' o 'no'.")
-	else:
-		bot.send_message(message.chat.id, "Por favor, envía un archivo llamado 'proxies.txt'.")
+    else:
+	    bot.send_message(message.chat.id, "Por favor, envía un archivo llamado 'proxies.txt'.")
 
 def register_admin_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['add_plus'])
