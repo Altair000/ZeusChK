@@ -21,7 +21,7 @@ bugsnag.configure(
 # Manejador para documentos recibidos
 @bot.message_handler(content_types=['document'])
 def handle_document(message):
-    if not is_owner(user_id):
+    if not is_owner(message.from_user.id):
         bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
         return
     
