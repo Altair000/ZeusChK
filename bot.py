@@ -21,9 +21,9 @@ bugsnag.configure(
 def handle_document(message):
     if not is_owner(message.from_user.id):
         bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
-        return
-    bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
-    if message.document.file_name == 'proxies.txt':
+    else:
+        bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
+    if message.document.file_name == 'proxies':
         file_path = bot.get_file_path(message.document.file_id)
         proxies_list = update_proxies_list(file_path)
 
@@ -69,7 +69,7 @@ def handle_document(message):
             else:
                 bot.send_message(message.chat.id, "Por favor, responde con 'sí' o 'no'.")
     else:
-	    bot.send_message(message.chat.id, "Por favor, envía un archivo llamado 'proxies.txt'.")
+	      bot.send_message(message.chat.id, "Por favor, envía un archivo llamado 'proxies.txt'.")
 
 app = Flask(__name__)
 handle_exceptions(app)
