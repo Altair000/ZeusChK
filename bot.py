@@ -23,7 +23,7 @@ def handle_document(message):
         bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
     else:
         bot.send_message(message.chat.id, "ACCESO CONCEDIDO.")
-    if message.document.file_name == 'proxies':
+    if message.document.file_name == 'proxies.txt':
         file_path = bot.get_file_path(message.document.file_id)
         proxies_list = update_proxies_list(file_path)
 
