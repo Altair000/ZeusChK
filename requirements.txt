@@ -2,3 +2,4 @@ pyTelegramBotAPI==4.3.1
 pymysql==1.0.2
 flask
 braintree
+bugsnag
