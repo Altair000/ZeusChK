@@ -19,7 +19,7 @@ def stripe(card, message):
     
     response = session.get(f'https://blackheadsop.cc/api/index.php?card={card}')
     sent_message = bot.send_message(message.chat.id, "Comenzando...")
-        for i in range(10):
+    for i in range(10):
             bot.edit_message_text(chat_id=message.chat.id,
                                   text = f'''
                                   • VERIFICANDO CC: •{i * 10}%''',
