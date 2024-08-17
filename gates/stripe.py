@@ -6,7 +6,7 @@ from handlers.command_handlers import *
 
 def stripe(card, message):
     response = requests.get(f'https://blackheadsop.cc/api/index.php?card={card}')
-    
+    bot.send_message(message.chat.id, "Procesando•••"
     if response.status_code == 200:
         json_response = response.json()
         
