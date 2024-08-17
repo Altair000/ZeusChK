@@ -3,6 +3,7 @@ from telebot import TeleBot
 from utils.bot_config import *
 from handlers.command_handlers import start
 from database.db import *
+from utils.proxies import *
 
 # Función para agregar un usuario plus
 @bot.message_handler(commands=['add_plus'])
