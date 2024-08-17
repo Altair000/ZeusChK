@@ -10,6 +10,7 @@ from admin.admin_cmds import register_admin_command_handlers
 from admin.admin_cmds import *
 from gates.stripe import *
 from utils.proxies import *
+from database.db import *
 
 # Configure BugSnag
 bugsnag.configure(
