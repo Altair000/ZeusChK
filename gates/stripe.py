@@ -112,15 +112,14 @@ def stripe(card, message):
             elapsed_time = time.time() - start_time
 
             final_message = (
-                f"ðð®ð¿ð±: {card}\n"
-                f"ððð­ðð°ðð²: Stripe Donation 1$\n"
-                f"ððð¬ð©ð¨ð§ð¬ð: {stripe_response.text}\n"
-                f"Payment Id : {payment_id}\n"
-                f"ð§ð¶ðºð²: {elapsed_time:.2f} seconds",
-                parse_mode="HTML"
+                f"🪙 Tarjeta: {card}\n"  # Información de la tarjeta
+                f"💵 Monto de donación: Stripe Donation $1\n"  # Monto de la donación
+                f"📜 Respuesta de Stripe: {stripe_response.text}\n"  # Respuesta de Stripe
+                f"ID de Pago: {payment_id}\n"  # ID del pago
+                f"⏱️ Tiempo transcurrido: {elapsed_time:.2f} segundos",  # Tiempo transcurrido
             )
             
-            bot.reply_to(message, final_message)
+            bot.reply_to(message, final_message, parse_mode="HTML")
         else:
             bot.reply_to(message, "Error: No payment_id found in the response.")
     else:
