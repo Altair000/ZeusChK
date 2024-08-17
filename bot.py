@@ -1,5 +1,7 @@
 import telebot
 import os
+import bugsnag
+from bugsnag.flask import handle_exceptions
 from flask import Flask, request
 from handlers.command_handlers import register_command_handlers
 from handlers.callback_handlers import register_callback_handlers
@@ -8,7 +10,14 @@ from admin.admin_cmds import register_admin_command_handlers
 from admin.admin_cmds import *
 from gates.stripe import *
 
+# Configure BugSnag
+bugsnag.configure(
+  api_key = "d2055e6398e4602fb88c70a77cf896ac",
+  project_root = "/apps/zeuschk/",
+)
+
 app = Flask(__name__)
+handle_exceptions(app)
 TOKEN = os.environ.get('TELEGRAM_TOKEN')
 
 @app.route('/' + TOKEN, methods=['POST'])
