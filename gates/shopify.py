@@ -4,26 +4,21 @@ import random
 from utils.helpers import *
 from utils.bot_config import *
 from handlers.command_handlers import *
+from utils.proxies import *
 
 def shopify(cc, mes, ano, cvv, message):
     chat_id = message.chat.id
     session = requests.Session()
     
-    proxy_pool = [
-        'http://oumcwwhu:ay3xyt6fv7hz@45.127.248.127:5128',
-        'http://oumcwwhu:ay3xyt6fv7hz@64.64.118.149:6732',
-        'http://oumcwwhu:ay3xyt6fv7hz@167.160.180.203:6754'
-    ]
-
-    def get_random_proxy():
-        return random.choice(proxy_pool)
-
-    for _ in range(1):
-        proxy = get_random_proxy()
+    # Verifica si hay proxies funcionales en el diccionario
+    if proxies_list:
+        # Seleccionar un proxy aleatorio del diccionario
+        selected_proxy = random.choice(list(proxies_list.values()))
         session.proxies = {
-            'http': proxy,
-            'https': proxy
+            'http': f"http://{selected_proxy['user']}:{selected_proxy['pass']}@{selected_proxy['ip']}:{selected_proxy['port']}",
+            'https': f"http://{selected_proxy['user']}:{selected_proxy['pass']}@{selected_proxy['ip']}:{selected_proxy['port']}"
         }
+    
         try:
             response = session.get('http://www.httpbin.org/ip')
             print(response.text)
