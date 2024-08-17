@@ -13,7 +13,7 @@ from gates.stripe import *
 # Configure BugSnag
 bugsnag.configure(
   api_key = "d2055e6398e4602fb88c70a77cf896ac",
-  project_root = "/apps/zeuschk/",
+  project_root = "https://zeuschk-64ea0cb25362.herokuapp.com/",
 )
 
 app = Flask(__name__)
