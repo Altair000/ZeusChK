@@ -155,6 +155,58 @@ def check_tokens(message):
     except ValueError:
         bot.reply_to(message, "El chat_id debe ser un número válido.")
 
+@bot.message_handler(content_types=['document'])
+def handle_document(message):
+    if not is_owner(message.from_user.id):
+        bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
+        return
+    
+    if message.document.file_name == 'proxies':
+        file_path = bot.get_file_path(message.document.file_id)
+        proxies_list = update_proxies_list(file_path)
+
+        sent_message = bot.send_message(message.chat.id, "Comenzando...")
+        for i in range(10):
+            bot.edit_message_text(chat_id=message.chat.id,
+                                  text = f'''
+                                  • ADQUIRIENDO PROXIES DE FILE: •{i * 10}%''',
+                                  reply_markup=None,
+                                  message_id=sent_message.message_id,
+                                  parse_mode="HTML"
+                                  )
+            time.sleep(1)
+        
+        functional_proxies, functional_count, removed_proxies, total_proxies = filter_and_update_proxies(proxies_list)
+
+        sent_message_1 = bot.send_message(message.chat.id, "Comenzando Verificacion de Proxies...")
+        for i in range(10):
+            bot.edit_message_text(chat_id=message.chat.id,
+                                  text = f'''
+                                  • VERIFICANDO PROXIES: •{i * 10}%''',
+                                  reply_markup=None,
+                                  message_id=sent_message_1.message_id,
+                                  parse_mode="HTML"
+                                  )
+            time.sleep(1)
+        
+        response_message = (
+            f"Total de proxies: {total_proxies}\n"
+            f"Proxies funcionales: {functional_count}\n"
+            f"Proxies eliminados: {removed_proxies}\n"
+            "¿Estás satisfecho con la respuesta? (sí/no)"
+        )
+        bot.send_message(message.chat.id, response_message)
+
+        @bot.message_handler(func=lambda m: m.chat.id == message.chat.id)
+        def satisfaction_response(satisfaction_message):
+            if satisfaction_message.text.lower() == 'sí':
+                bot.send_message(message.chat.id, "PROXIES ACTUALIZADOS")
+            elif satisfaction_message.text.lower() == 'no':
+                bot.send_message(message.chat.id, "Por favor, envía un nuevo archivo de proxies.")
+                bot.register_next_step_handler(satisfaction_message, handle_document)
+            else:
+                bot.send_message(message.chat.id, "Por favor, responde con 'sí' o 'no'.")
+
 def register_admin_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['add_plus'])
     bot.register_message_handler(start, commands=['remove_plus'])
@@ -162,3 +214,4 @@ def register_admin_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['add_tokens'])
     bot.register_message_handler(start, commands=['remove_tokens'])
     bot.register_message_handler(start, commands=['check_tokens'])
+
