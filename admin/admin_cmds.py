@@ -1,7 +1,6 @@
 import telebot
 from telebot import TeleBot
 from utils.bot_config import *
-from handlers.command_handlers import start
 from database.db import *
 from utils.proxies import *
 
@@ -219,6 +218,7 @@ def handle_document(message):
         bot.send_message(message.chat.id, "Por favor, envía un archivo 'proxies.txt'.")
 
 def register_admin_command_handlers(bot: TeleBot):
+    from handlers.command_handlers import start
     bot.register_message_handler(start, commands=['add_plus'])
     bot.register_message_handler(start, commands=['remove_plus'])
     bot.register_message_handler(start, commands=['verify_plus'])
