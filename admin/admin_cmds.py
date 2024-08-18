@@ -2,6 +2,7 @@ import telebot
 from telebot import TeleBot
 from utils.bot_config import *
 from database.db import *
+from utils.proxies import *
 
 # Función para agregar un usuario plus
 @bot.message_handler(commands=['add_plus'])
@@ -157,7 +158,6 @@ def check_tokens(message):
 # Manejador para documentos recibidos
 @bot.message_handler(content_types=['document'])
 def handle_document(message):
-    from utils.proxies import *
     if not is_owner(message.from_user.id):
         bot.send_message(message.chat.id, "No tienes permiso para usar este comando.")
         return
