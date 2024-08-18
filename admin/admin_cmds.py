@@ -1,7 +1,7 @@
 import telebot
 from telebot import TeleBot
 from utils.bot_config import *
-from handlers.command_handlers import *
+from handlers.command_handlers import start
 from database.db import *
 from utils.proxies import *
 
