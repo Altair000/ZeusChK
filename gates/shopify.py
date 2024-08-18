@@ -2,8 +2,7 @@ import requests
 import time
 import random
 from utils.helpers import *
-from utils.bot_config import *
-from handlers.command_handlers import *
+from utils.bot_config *
 from utils.proxies import *
 
 def shopify(cc, mes, ano, cvv, message):
