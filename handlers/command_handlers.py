@@ -2,9 +2,6 @@ from telebot import TeleBot, types
 from database.db import *
 from handlers.callback_handlers import *
 from services.card_generator import *
-from gates.shopify import *
-from gates.stripe import *
-from gates.braintree import *
 import random
 import requests
 import re
@@ -169,6 +166,7 @@ def gen(message: types.Message):
 
 @bot.message_handler(commands=['sh'])
 def sh(message):
+    from gates.shopify import *
     user_id = message.from_user.id
     if is_plus(user_id):
         card_data = message.text.split()[1]  # Asume que el usuario envía /pay ccn|mm|yyyy|cvv
@@ -180,11 +178,13 @@ def sh(message):
 
 @bot.message_handler(commands=['st'])
 def st(message):
+    from gates.stripe import *
     card = message.text[4:].strip()
     stripe(card, message)
 
 @bot.message_handler(commands=['b3'])
 def b3(message):
+    from gates.braintree import *
     try:
         # Supongamos que el usuario envía los datos en el formato: número, fecha, cvv
         card_info = message.text.split()[1]  # Ignorar el comando y obtener los argumentos
