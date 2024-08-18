@@ -1,6 +1,5 @@
 import requests
 from utils.bot_config import *
-from admin.admin_cmds import handle_document, satisfaction_response
 
 def update_proxies_list(file_path):
     proxies_list = {}
