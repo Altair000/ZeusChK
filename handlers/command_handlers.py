@@ -231,6 +231,12 @@ def b3(message):
 <b>Resultado:</b> <code>{msg}</code>
 <b>Respuesta:</b> <code>{respuesta}</code>
         """, parse_mode='HTML')
+        
+@bot.message_handler(commands=['sd'])
+def sd(message):
+    from gates.stripe_charge import stripe_charge
+    card = message.text[4:].strip()
+    stripe_charge(card, message)
 
 def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(start, commands=['start'])
@@ -241,3 +247,4 @@ def register_command_handlers(bot: TeleBot):
     bot.register_message_handler(sh, commands=['sh'])
     bot.register_message_handler(st, commands=['st'])
     bot.register_message_handler(b3, commands=['b3'])
+    bot.register_message_handler(sd, commands=['sd'])
