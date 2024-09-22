@@ -1,6 +1,5 @@
 def stripe_charge(message):
-    card = message.text[4:].strip()
-
+    
     response = requests.get(f'https://blackheadsop.cc/api/index.php?card={card}')
     
     if response.status_code == 200:
